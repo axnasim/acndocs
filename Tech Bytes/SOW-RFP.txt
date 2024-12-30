@@ -1,0 +1,43 @@
+every mkt team has own view data sets
+start deploying sf internally, need to prep with backend infrastructure & follow devops infrastructure
+want to do devops assessment, 
+cloud not mature enough, someone to assess the devops side
+what alignments need to be done
+give analysis of assessments
+pilot future state
+
+quick turn around
+no enthusiasm in team to bring out devops capability
+
+meeting tomorrow
+slide 6, 8 10 and 11
+take look at RFP and align current landscape, objectives to RFP
+
+10.253.36.104
+
+
+
+RFP
+slide 5 - not an outcome, less of an objective and more of an activity
+why we doing this
+value we get out of this
+
+Each slide should have different purpose and functions
+overview -> detail--> why pick as a partner
+
+Slide 9 - Assessment Approach
+highlight active partnership
+take our DevOps methodology and mould in into their ASK
+Prepare = Discover & Describe = Co-Create
+
+slide 10 - why this approach works (Are we trying to do too much)
+partnership, work on workding
+highlight conerstone areas of devops - source control, gen AI
+future state , how to get to the north star
+what are we trying to communicate with the slide
+
+Part of program framework
+where we recommend a boot camp training, sort of differentiator
+
+slide 12 - key deliverables & detailed description
+highlight

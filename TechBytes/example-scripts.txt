@@ -1,0 +1,327 @@
+Declare a slice, add items to the slice and iterate over the slice using a loop
+package main
+
+func main () {
+    var numbers []int
+        numbers = append(numbers, 1)
+        numbers = append(numbers, 2)
+        numbers = append(numbers, 3)
+
+        for _, i := range numbers {
+            print(i)
+        }
+}
+func EvenCheck(x int) error {
+if x%2 == 0 {
+   return nil
+   err := EvenCheck(10)
+if err != nil {
+    panic(err)
+}
+}
+return errors.New("not an even number")
+}
+
+########################################################################################
+Declare a channel and receive and write data
+package main
+
+func channelReceiver(ch chan string) {
+    for i := 1; i <= 10; i++ {
+        ch <- "Hello"
+    }
+    close(ch)
+}
+
+func main () {
+    ch := make(chan string, 1)
+    go channelReceiver(ch)
+
+    for s := range ch {
+        println(s)
+    }
+}
+
+########################################################################################
+Declare a function and execute the function using goroutine
+package main
+
+import(
+    "sync"
+)
+
+var wg sync.WaitGroup
+
+func IAmGoroutine () {
+    for i := 1; i <= 100; i++ {
+        continue
+    }
+    wg.Done()
+}
+
+func main () {
+    wg.Add(1)
+    go IAmGoroutine()
+    wg.Wait()
+}
+
+########################################################################################
+Create a Struct and Interface
+package main
+
+# create the interface
+type Human interface {
+    Say() String
+}
+
+# Create a Struct with fields
+type Animal struct {
+    Name string
+    Age int
+}
+#  implement Human interface in Animal struct,
+func (a *Animal) Say() string {
+    return "Hello"
+}
+
+func main () {
+	#  create an instance of Animal,
+    var a Human
+    a := &Animal{}
+    println(a.Say())
+}
+# Golang support method overloading NO
+
+########################################################################################
+Create a HTTP handler
+
+package main
+
+func main () {
+
+}
+In the main function create a request handler,
+http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+
+})
+Import net/http package,
+
+import(
+    "net/http"
+)
+Now write functionalities, so the handler returns Hello World as body and status code 200,
+http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+    w.WriteHeader(200)
+    w.Write([]byte("Hello World"))
+})
+In this step start the http server on port 8086,
+if err := http.ListenAndServe("0.0.0.0:8086", nil); err != nil {
+    panic(err)
+}
+
+########################################################################################
+# Golang Echo Framework
+
+package main
+
+func main () {
+
+}
+# add Echo library
+GO111MODULE=on go get github.com/labstack/echo/v4
+
+# import echo library,
+import(
+    "github.com/labstack/echo/v4"
+)
+
+# create an instance of Echo in the main function,
+e := echo.New()
+
+# function to handle request at path /,
+func IndexHandler(ctx echo.Context) error {
+    return ctx.Render(http.StatusOK, "index.html", map[string]interface{}{
+    })
+}
+
+# Add the handler to the router,
+e.GET("/", IndexHandler)
+
+# function named findInCSV with parameter id type string and will return 3 parameters string, string, error,
+func findInCSV(id string) (string, string, error) {
+    csvFile, err := os.Open("Lab06/test.csv")
+    if err != nil {
+        return err
+    }
+    defer csvFile.Close()
+
+    csvLines, err := csv.NewReader(csvFile).ReadAll()
+    for _, line := range csvLines {
+        if line[0] == id {
+            return line[1], line[2], nil
+        }
+    }
+    return "", "", errors.New("id not found")
+}
+
+# call findInCSV() function from the handler with id, parse id query param and pass the result to HTML template.
+id := ctx.QueryParam("id")
+title, content, err := findInCSV(id)
+return ctx.Render(http.StatusOK, "index.html", map[string]interface{}{
+    "err": err,
+    "id": id,
+    "title": title,
+    "content": content
+})
+
+# HTML template named index.html in root directory which will render data or error,
+{{ if .err }}
+    <h2>{{ .id }} not found</h2>
+{{else}}
+    <h1>{{ .title }}</h1>
+    <p>{{ .content }}</p>
+{{end}}
+
+# Add template to rendering engine,
+var files []string
+files = append(files, "./index.html")
+renderer := Lab06.NewTemplateRenderer()
+templates := template.Must(renderer.Templates.ParseFiles(files...))
+renderer.Templates = templates
+e.Renderer = renderer
+
+# start the server on port 8086,
+hServer := http.Server {
+    Addr: "0.0.0.0:8086",
+    Handler: e,
+}
+if err := hServer.ListenAndServe(); err !=nil {
+    panic(err)
+}
+
+#  open the web browser and the browser URL bar type:
+localhost:8086?id=1
+
+# errorlocalhost:8086?id=10
+
+# What is the correct way to iterate loop within template? (Select one correct answer.)
+range $v := .array_list
+
+
+########################################################################################
+# Implement a REST API
+
+package main
+
+func main () {
+
+}
+Initiate the module by executing the following command in terminal,
+go mod init example.com/test
+Now add Echo library,
+GO111MODULE=on go get github.com/labstack/echo/v4
+And import echo library,
+import(
+    "github.com/labstack/echo/v4"
+)
+Then create an instance of Echo in the main function,
+e := echo.New()
+Now add a function to handle request at path /,
+func IndexHandler(ctx echo.Context) error {
+    return ctx.JSON(http.StatusOK, map[string]interface{}{
+
+    })
+}
+Add the handler to the router,
+e.GET("/", IndexHandler)
+Now write a function named findInCSV with parameter id type string and will return 3 parameters string, string, error,
+func findInCSV(id string) (string, string, error) {
+    csvFile, err := os.Open("Lab06/test.csv")
+    if err != nil {
+        return err
+    }
+    defer csvFile.Close()
+
+    csvLines, err := csv.NewReader(csvFile).ReadAll()
+    for _, line := range csvLines {
+        if line[0] == id {
+            return line[1], line[2], nil
+        }
+    }
+    return "", "", errors.New("id not found")
+}
+Note: Import errors package.
+
+In this step call findInCSV() function from the handler with id, parse id query param and serve as JSON.
+id := ctx.QueryParam("id")
+title, content, err := findInCSV(id)
+if err != nil {
+    return ctx.JSON(http.StatusNotFound map[string]interface{}{
+        "err": err,
+    })
+}
+
+return ctx.JSON(http.StatusOK, map[string]interface{}{
+    "id": id,
+    "title": title,
+    "content": content,
+})
+Finally start the server on port 8086,
+hServer := http.Server {
+    Addr: "0.0.0.0:8086",
+    Handler: e,
+}
+if err := hServer.ListenAndServe(); err !=nil {
+    panic(err)
+}
+Finally start the server on port 8086,
+hServer := http.Server {
+    Addr: "0.0.0.0:8086",
+    Handler: e,
+}
+if err := hServer.ListenAndServe(); err !=nil {
+    panic(err)
+}
+Now open the web browser and the browser URL bar type: localhost:8086?id=1 lab07%20end%201.png
+
+Now type: localhost:8086?id=10
+
+########################################################################################
+
+ Write a function to sum two parameters and write a test to verify the results
+Open Visual Studio Code by clicking the Visual Studio icon on the Ubuntu Dock
+On the getting started page for Visual Studio Code, select Open Folder…
+In the explorer, choose LAB08 in the Home directory.
+In main.go, write a basic Go program
+package main
+
+func main () {
+
+}
+Initiate the module by executing the following command in terminal,
+go mod init example.com/test
+Now write a function named Sum with params int, int and return type int,
+func Sum(a, b int) int {
+    return a+b
+}
+Now add the test file main_test.go to write tests,
+package main
+
+import(
+    "testing"
+)
+
+func TestSum(t *tesing.T) {
+    a := 10
+    b := 5
+    s := Sum(a, b)
+    r := 15
+    if s != r {
+        t.Errorf("Expected %d, Got %d", r, s)
+        return
+    }
+}
+Finally from the terminal run the test,
+go test -run TestSum
+
+########################################################################################

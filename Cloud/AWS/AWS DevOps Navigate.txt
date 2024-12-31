@@ -1,0 +1,181 @@
+AWS DevOps
+CodeCommit
+CodePipeline
+CodeBuild
+Lamda
+ElasticBeanStalk
+
+Container Concepts
+absraction-allows for simplicity,improve efficiency, productivity, agility
+eg cash-check-cc-mobilepay
+bare metal hardwae-vm-containers-serverless
+docker 2013 lightweight virtualization platform
+microservices-architecture style 4 decomposing monolithic apps into independent deployable scalable as needed or SOA composed of loosely coupled elements that have bounded contexts.
+works well with container based workloads, quick deployment cycles,support polyglot persistence
+
+Platform abstraction with Docker
+bare-metal-servers --> hw/os/lib/apps
+VMS --> hw/os/vm platform(os/libs/apps x4 vms)
+conainers --> hw/os/container platform(/lib/apps x 3containers)...shares os kernel, lib shared
+Benefits
+portable app environment
+packaged into single image
+run different apps simultaneously
+faster dev & deployment cycles
+better resource utilization & efficiency
+Agility-portability/flexibiilty/immutability/speed/efficiency
+
+Images-read-only template(dockerfile) for creating docker container
+to build a dockerfile, you define syntax and run it
+images built with RO layers
+each syntax of a dockerfile adds layer to image
+container is a running instance of an image
+
+Microservices 
+architecture style 4 decomposing monolithic apps into independent deployable scalable as needed or SOA composed of loosely coupled elements that have bounded contexts.
+Characteristics-components via services/smart endpoints & dump pipes/products !projects/decentralized governance/designed 4 failure/decentralized data management/infrastructure automation/organized around biz/evolutionary design
+12 factor app-codebase/dependencies/config-backings servics/build release run/process-port binding/concurency/disposability/-devprod parity/logs/admin process(12factor.net)
+
+Scaling
+management platforms-scheduling and placement/integrate with networking/storage,security,monitoring,logging
+e.g - ecs, docker swarm, kubernetes, marathon
+
+ECS-elastic container service
+Amazon ECS-EC2 instances(containers) in several zones
+clusters, tasks, services
+
+Native Tools & Workflows
+Ecosystem Integration
+Fargate-compute engine for Amazon ECS that allows you to run containers without having to manage servers or clusters.technology for deploying and managing containers
+
+Task-ECS agent/docker agent/ECS AMI
+ECS scheduling & orchestration/placement engine/cluster manager
+Tasks run in VPC
+AppLB & NetworkingLB support
+advanced task level networking
+fargate owns infrastrucute
+customs owns & manages taks
+No SSH access to infrastructure
+Cluster level isolation for your containers
+ECS/EKS/ECR
+
+OpsWorks for Chef Automate
+app management service using chef automate to treat server configuration as code in cloud
+chef uses cookbooks, nodes, recipes.
+
+Elastic Beanstalk
+an orchestration service offered by Amazon Web Services for deploying applications which orchestrates various AWS services, including EC2, S3, Simple Notification Service, CloudWatch, autoscaling, and Elastic Load Balancers
+PaaS that allows quick deployment of apps, reduces management complexity
+choose instance,db,set & adjust autoscaling
+Components-code/app service/http/os/language interpreter/host
+elastic beanstalk - building a computer vs giving specs for one to be built
+
+Lambda
+Lambda lets you run code without provisioning or managing servers. You pay only for the compute time you consume - there is no charge when your code is not running.
+
+Codestart
+develop, build & deploy apps on AWS.
+create project--add team members--develop commit---build---deploy---monitor--plan & manage tasks--develop commit
+
+CodeCommit-store code in private repos
+Fully-managed source control service that hosts secure Git-based repositories. It makes it easy for teams to collaborate on code in a secure and highly scalable ecosystem. 
+
+CodePipeline-release software using CI CD
+continous delivery service that orchestrates the automatic building, testing and deployment of your code with each modification.
+CodePipeline automates the build, test, and deploy phases of your release process every time there is a code change, based on the release model you define.
+
+CodeBuild-compile, build, test and package code with continous scaling with pay-as-you-go
+fully managed build service that compiles source code, runs tests, and produces software packages that are ready to deploy.
+
+CodeDeploy-automate code deployments
+service that automates code deployments to any instance, including Amazon EC2 instances and servers running on-premises
+
+Containers are better than VMs coz of better agility
+
+Continous Delivery-practive of rapidly and safely deploying code to production.
+every change is prod-like environment with rigorous automated testing
+
+Continous Deployment-next step of continous delivery, every change that passes automated tests is prod ready. All companies should do this.
+
+AWS Ecosystem Integration
+Concepts-docker, microservices
+ASF-http server/cassandra/hadoop/spark/flink/mesos/kafka
+CNCF(Cloud Native Computing Foundation) -create & drive adoption on new computing paradigm optimized for distributed env 4 scaling apps
+
+Kubernetes-OS 4 deployment,scaling & management 4 on-premise
+Prometheus-systems monitoring & alerting toolkit
+Containerd-OS container runtime 4 windows, Linux
+Fluent-OS data collector 4 filters,buffers and outputs logs across multiple sources
+
+Started by google
+loosely coupled & extensible
+automatic binpacking, self healing, service discovery & lb, automated rollouts rollbacks, horizontal scaling
+Kubernetes diagram
+master nodes-
+etcd(backing store 4 cluster data & state)
+controller-manager(runs controllers, bground threads 4 tasks)
+scheduler(picks node 4 new pods to run on),dns,
+api-server(front end 4 control plane)
+Node is worker machine-has docker
+kubelet(primary node watches 4 pods assigned to its node, mounts volumes, dloads sheets,run pods containers, liveness probe, reporting), 
+proxy(network rules on host & connection fwding)
+slave nodes-kubelet(talktoapiserver),proxy,pod(containers)
+pods-basic building bloc of kubernetes, encapsulates container, unique IP
+replicas of pods ensures a specified # of pod replicas are running
+deployment - deployment controller changes actual state to desired state, creates and remove replicasets, manage multiple pods at once
+Service - deployments will automatically create and kill pods to maintain desired state, defines logical set of pods & communication policy to access them, enables decoupling
+
+EKS-elastic container for Kubernetes
+4 tenets-platform for enterprises to run prod workloads/provide native upstream experience/seamless integration with AWS services/active contribution by EKS team
+Kubernetes customer wish list-frequency reduces difficulty/consistency improves confidence/automation/smaller batch sizes for debug/latency b/w code check-in & prod is waste/faster delivery
+Source-version control, branching, code review
+Build-compilation, testing, static analysis, packageing
+Test-integration tests, load tests, security tests, acceptance tests
+Prod-deployment, monitoring, measuring, validation
+
+Docker images created by docker file packages application code & runtime dependencies into a single build artifact which is reproducible, immutable, portable.
+Best practices-pin external dependencies to specific versions for reproducibility/pkg only runtime requirements for prod/minimize changes in each layer to maximize cachability/dockerignore 4 unneeded files
+
+ECS - DNS Swap/canary/target group swap/
+Full CI/CD-developers->git-->AWS Codepipeline->AWS CodeBuild->AWS CodeFormation->Amazon ECS->Amazon ECR
+
+ECSE Native Tools-Elastic Container Service
+highly scalable & performance container managment service. Integrates with other AWS services
+Each EC2 instance has docker, 
+ECS agent-runs on each EC2 instance within an ECS cluster,starts&stops tasks
+Task-instance of task definition created on EC2 instance within the cluster
+Cluster-logical grouping of EC2 instances on which tasks run
+Backplane-ECS service itself
+Service-group of tasks, maintained as instances of task definition, schedular maintains the desired count of tasks,
+Task Definition-json file that describes containers that together make an application
+ 
+ECS-fully managed container orchestration & managment service, supports scheduling containers with blox(open source scheduler)
+
+ECR-Elastic Container Registry
+fully managed cloud based docker registry
+Binpack-based on least available CPU or memory
+Spread-based on evenly specified value
+Affinity-place tasks based on group membership
+Distinct Instance-task based on different container instance
+
+Tasks vs Services
+On-Demand Workloaads-ECS task schedular/run once or intervals/batch jobs/runtask API/starttask
+Long-Running Apps-ECS service schedular/health management/scaleupdown/AZ aware/grouped containers
+
+Blox-Open-Source Schedulers(daemon scheduler)
+what and when to run container or set of containers
+based on tasks & services
+runs one-task-per-instance on a cluster
+automatically start a task as new instances join the cluster
+monitors daemon and restart tasks as needed
+logging or monitoring agents
+directory traversal url encoding
+
+Decoupling-SNS/SQS
+LoadBal-ELB/ALB/NLB
+DNS-Route 53
+Auth-IAM
+Secrets Management-EC2 parameter store
+Exposing Service-API Gateway
+CICD-Code
+Monitoring,Logging,Alerting-Cloudwatch

@@ -1,0 +1,161 @@
+Agility
+Elasticity
+Cost Reduction
+Global Reach
+Breadth of Services
+Reduced prices 72 times since 2006
+Expanding services
+
+S3
+Aurora
+Snowball
+
+Leadership Principles
+Customer Obsession
+Learn and Be Curious
+Earn Trust
+Deep Dive
+Invent and Simplify
+Think Big
+Bias For Action
+Deliver Results
+
+Solution Architect
+Define scope
+Dive Deep
+Design "Well-Architected" solutions
+Earn trust & Educate
+Iterate, Invent & Simplify, Innovate
+
+Cloud computing
+On-demand/IT resources/accessible online/pay-as-you-go
+
+customer base-enterprises/startups/public sectors
+
+Gartner Magic Quadrant-top 15 vendors
+
+AWS Benefits
+cost savings
+no upfront investments
+flexible capacity/resources as you need
+speed agility/on-demand provisioning
+global multiple zones
+
+Security/Network/Servers/Storage
+
+Application security is a goal to decreasing the time to implement production changes
+The threat environment is increasing rapidly
+Most vulnerabilities that are exploited are known and organizations don't take them seriously
+You are only as secure as the env you are operating in
+Compute
+Storage & Content Delivery
+Databases
+Networking
+Security & Identity
+Analytics
+Deployment & Management
+Enterprise IT Apps
+
+EC2-Elastic Compute Cloud
+app/web/db/game/mail/media/catalog/file/proxy servers
+process-choose region->AMI->Instance-type-HW->network->storage->keypairs->Connect
+General/Compute/Accelerated/Storage/Memory
+
+App Load Balancer
+added features include-supported protocols/access logs/health checks/cloudwatch metrics
+setup routing rules based on port, listeners and register target groups
+
+Simple Storage Service
+API for storing and getting data
+S3 associated with region
+scale to handle high volume
+Access via aws cli/aws sdks/aws console
+data in s3 can be replicated in another region
+can use versioning
+
+EBS-Elastic Block Store
+Storage unit for EC2 instances
+HDD/SSD
+Data replicated in all availability zones
+
+CloudFront
+connected to edge locations globally
+cache content close client CDN
+request routed to nearest edge for faster delivery
+
+Data Pipeline
+Helps move data within AWS
+Features-tasks, tasks runner, pipeline, pipeline definition(data source/activities/schedule/preconditions)
+compatible storage services-S3/RDS/DynamoDB/Redshift
+e.g-daily task to copy web server log files from EC2->S3 then analyzed by EMR weekly for traffic reports
+Used for ETL/data backups/EMR jobs/importing data
+
+Snowball Edge
+transfer huge amounts data in/out of AWS
+100TB capacity
+high data transfer rates
+
+DB-RDS
+SQL-Transaction-Caching-Logs-Storage
+2 engineers walk into a NoSQL bar, they walkin look around and walk out. Why? No tables
+
+AWS Direct Connect
+Cloud service solution that makes it easy to establish a dedicated network connection from your premises to AWS.
+10Gbps & 1Gbps
+
+VPC-virtual private cloud
+network configuration, security control layers
+zone regions/subnets/route tables/internet gw/nat gw/nacl
+
+CloudWatch
+Logs(EC2,CloudTrail,-->Metrics-->Alerts(SNS-email,notifications,
+
+EMR-Elastic Map Reduce
+create & manage EC2 hadoop clusters running mapreduce/hive/spark/impala/pig/presto/hbase/flink & connectors for S3/DynamoDB/Kinesis/RedShift
+
+AWS Kinesis
+Real time data streaming service 4 collecting,process,analyze data.
+streams/firehose/
+Generate time-series analytics/real-time dashboards/real-time metrics
+
+OpsWorks
+Config management for building apps & propagating changes.
+OpsWorks Stacks & OpsWorks Chef Automate
+
+CloudFormation
+Automates applications for AWS resources
+Create/Update/Delete stacks
+Features-templates & permissions
+
+WorkSpaces
+Managed Desktop computing service managed in cloud for remote workers/students/developers/graphic apps
+
+AWS ElasticCache
+fully managed in-memory cache for Redis and Memcached
+AppServer-->ElastiCache-->Nodes-->Redis & Memcached
+lazy loading-cache hit to find data in EC-->data get from DB(cache miss)-->app writes data to EC
+write through-data written to EC-->DB updated with data from EC
+adding TTL helps performance and app queries DB for data
+
+DynamoDB
+DB table noSQL service
+store as many items as possible
+
+Aurora
+DB mySQL & postgres relationship DB engine
+managed service
+backups to S3, resilient design
+multiple AZones
+
+RedShift
+Fully managed datawarehouse
+Run complex analytic queries
+S3 & DynamoDB
+
+Shared Responsibility Model
+Security and Compliance is a shared responsibility between AWS and the customer.
+
+AWS IAM
+User, Group, Role, Policy 
+
+userdata->app->os->hypervisor->network->physical
